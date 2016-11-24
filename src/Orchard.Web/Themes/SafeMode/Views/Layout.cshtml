@@ -1,0 +1,115 @@
+@using Orchard.UI.Resources;
+@{
+    Style.Include("https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css");
+    Style.Include("https://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.common.min.css");
+    Style.Include("https://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.metro.min.css");
+    Style.Include("https://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.dataviz.min.css");
+    Style.Include("https://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.dataviz.metro.min.css");
+    Script.Include("https://kendo.cdn.telerik.com/2015.3.1111/js/jquery.min.js");
+    Script.Include("https://kendo.cdn.telerik.com/2015.3.1111/js/kendo.all.min.js");
+    Script.Include("https://kendo.cdn.telerik.com/2015.3.1111/js/kendo.aspnetmvc.min.js");
+    Script.Include("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js");
+    Script.Include("ShapesBase");
+    Style.Include("site.css");
+    Style.Include("NorthWind.css");
+    Script.Include("kendo.modernizr.custom");
+    RegisterLink(new LinkEntry { Condition = "lte IE 6", Rel = "stylesheet", Type = "text/css", Href = Href("../Styles/ie6.css") }.AddAttribute("media", "screen, projection"));
+
+    if (!string.IsNullOrEmpty(WorkContext.CurrentSite.SuperUser))
+    {
+        WorkContext.Layout.Footer.Add(New.User(), "10"); // Login and dashboard links
+    }
+}
+<div id="header">
+    <div id="branding">
+        <h1>@T("Welcome to Orchard")</h1>
+    </div>
+</div>
+
+@if (Model.Navigation != null) {
+<div id="layout-navigation" class="group">
+    @Display(Model.Navigation)
+</div>
+}
+
+@if (Model.Messages != null) {
+<div id="messages">
+    @Display(Model.Messages)
+</div>
+}
+
+<div id="main">
+@if (Model.Content != null) {
+    @Display(Model.Content)
+}
+</div>
+
+@if (Model.Footer != null) {
+<div id="footer" role="contentinfo">
+    @Display(Model.Footer)
+</div>
+}
+
+@*<!DOCTYPE html>
+<html>
+<head>
+    <title>Northwind Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.common.min.css" rel="stylesheet">
+    <link href="https://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.metro.min.css" rel="stylesheet">
+    <link href="https://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.dataviz.min.css" rel="stylesheet">
+    <link href="https://kendo.cdn.telerik.com/2015.3.1111/styles/kendo.dataviz.metro.min.css" rel="stylesheet">
+    <script src="https://kendo.cdn.telerik.com/2015.3.1111/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2015.3.1111/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2015.3.1111/js/kendo.aspnetmvc.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    @{Style.Include("NorthWind.css");
+       // Script.Require("kendo.modernizr.custom");
+        }
+</head>
+<body>
+  <!-- Google Tag Manager -->
+  <noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+  </noscript>
+  <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+  <!-- End Google Tag Manager -->
+    <div class="container-fluid"><!--open container-->
+        <div class="row row-offcanvas row-offcanvas-left"><!--open row-->
+            <div id="nav-section" class="col-xs-12 column"><!--open nav column-->
+            <div class="navbar-default">
+                <button id="toggle-button" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <h1 id="dash-logo" class="center-block">Northwind&#183;Dash</h1>
+            <div class="collapse navbar-collapse" id="sidebar-nav" role="navigation">
+                <ul class="nav">
+                    <li id="RegionalSalesStatus"><a href="@(Url.Action("RegionalSalesStatus", "Home"))" ><span class="icon icon-chart-column"></span>Regional Sales Status</a></li>
+                    <li id="ProductsAndOrders"><a href="@(Url.Action("ProductsAndOrders", "Home"))" ><span class="icon icon-star-empty"></span>Products &amp; Orders</a></li>
+                    <li id="TeamEfficiency"><a href="@(Url.Action("TeamEfficiency", "Home"))" ><span class="icon icon-faves"></span>Team Efficiency</a></li>
+                    <li id="About"><a href="@(Url.Action("About", "Home"))" ><span class="icon icon-info"></span>About</a></li>
+                </ul>
+                <div id="rights">
+                    <p>Copyright &copy; 2016, Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.</p>
+                </div>
+            </div>
+            </div><!--close left column-->
+            <div id="main-section" class="col-xs-12 column"><!--open main column-->
+           @RenderBody()
+        </div><!--close main column-->
+        </div><!--close row-->
+    </div><!--close container-->
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle=offcanvas]').click(function () {
+                $('.row-offcanvas').toggleClass('active');
+            });
+        });
+    </script>
+</body>
+</html>*@

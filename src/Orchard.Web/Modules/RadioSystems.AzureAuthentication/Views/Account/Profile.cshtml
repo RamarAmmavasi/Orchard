@@ -1,0 +1,39 @@
+﻿@model RadioSystems.AzureAuthentication.Models.UserProfile
+@{
+    ViewBag.Title = "Claims";
+}
+
+<h4>Claims Present in the Claims Identity: @ViewBag.DisplayName</h4>
+<table class="table-hover claim-table">
+    <tr>
+        <th class="claim-type claim-data claim-head">Claim Type</th>
+        <th class="claim-data claim-head">Claim Value</th>
+    </tr>
+
+    <tr>
+        <td class="claim-type claim-data">@Html.Label("Name")</td>
+        <td class="claim-data">@Html.DisplayFor(m=>m.Name)</td>
+    </tr>
+    <tr>
+        <td class="claim-type claim-data">@Html.Label("Email")</td>
+        <td class="claim-data">@Html.DisplayFor(m => m.Email)</td>
+    </tr>
+    <tr>
+        <td class="claim-type claim-data">@Html.Label("City")</td>
+        <td class="claim-data">@Html.DisplayFor(m => m.City)</td>
+    </tr>
+    <tr>
+        <td class="claim-type claim-data">@Html.Label("State")</td>
+        <td class="claim-data">@Html.DisplayFor(m => m.State)</td>
+    </tr>
+    <tr>
+        <td class="claim-type claim-data">@Html.Label("Country")</td>
+        <td class="claim-data">@Html.DisplayFor(m => m.Country)</td>
+    </tr>
+    <tr>
+        <td class="claim-type claim-data">@Html.Label("Postal Code")</td>
+        <td class="claim-data">@Html.DisplayFor(m => m.Postalcode)</td>
+    </tr>
+</table>
+
+
